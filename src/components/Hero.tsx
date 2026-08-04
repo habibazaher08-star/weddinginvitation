@@ -30,12 +30,18 @@ export default function Hero() {
           At
         </p>
 
-        <h3 className="text-3xl italiana-regular">6 PM</h3>
+        <h3 className="text-3xl italiana-regular">5 PM</h3>
 
-        <p className="max-w-xs text-xl leading-8 italiana-regular">
-          The celebration starts at 6 PM. Don't be late — we'll be dancing
-          until twelve o'clock sharp.
-        </p>
+<div className="flex flex-col -mt-8">
+  <p className="max-w-xs text-xl leading-8 italiana-regular">
+    The celebration starts at 5 PM.
+  </p>
+
+  <p className="max-w-xs text-xl leading-8 italiana-regular">
+    Don't be late , we'll be dancing until twelve o'clock sharp.
+  </p>
+</div>
+
       </div>
     </section>
   );

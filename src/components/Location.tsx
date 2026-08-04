@@ -2,7 +2,7 @@ export default function Location() {
   return (
      <section className="w-full flex flex-col items-center text-center py-40 px-6">
       <div className="max-w-3xl flex flex-col items-center gap-8">
-        <h2 className="text-4xl italiana-regular" style={{ paddingTop: "120px" }}>
+        <h2 className="text-4xl italiana-regular" style={{ paddingTop: "100px" }}>
           Wedding Venue
         </h2>
 

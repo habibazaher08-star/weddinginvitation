@@ -1,13 +1,20 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
-const DESIGN_WIDTH = 430; // العرض اللي التصميم اتعمل عليه بالظبط
+const DESIGN_WIDTH = 430;
 
 export default function ScaleWrapper({ children }: { children: ReactNode }) {
   const innerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
+
+  // نحسب الـ scale الأولي فورًا من غير ما نستنى أي effect
+  const getInitialScale = () => {
+    if (typeof window === "undefined") return 1;
+    return Math.min(window.innerWidth / DESIGN_WIDTH, 1);
+  };
+
+  const [scale, setScale] = useState(getInitialScale);
   const [height, setHeight] = useState<number>(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateScale = () => {
       const vw = window.innerWidth;
       const newScale = Math.min(vw / DESIGN_WIDTH, 1);
@@ -20,7 +27,7 @@ export default function ScaleWrapper({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!innerRef.current) return;
 
     const observer = new ResizeObserver(() => {
@@ -34,7 +41,7 @@ export default function ScaleWrapper({ children }: { children: ReactNode }) {
   }, [scale]);
 
   return (
-    <div className="w-full flex justify-center bg-white">
+    <div className="w-full flex justify-center bg-white overflow-x-hidden">
       <div
         style={{
           width: DESIGN_WIDTH * scale,
